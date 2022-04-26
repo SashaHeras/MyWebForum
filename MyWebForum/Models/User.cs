@@ -30,7 +30,7 @@ namespace MyWebForum.Models
 
         public string? Created { get; set; }
 
-        public byte[] Picture { get; set; }
+        public byte[]? Picture { get; set; }
 
         public bool IsAdmin { get; set; }
 

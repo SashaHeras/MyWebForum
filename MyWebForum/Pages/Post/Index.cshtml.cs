@@ -5,6 +5,7 @@ using MyForum.Extensions;
 using MyWebForum.Data;
 using MyWebForum.Data.Interfaces;
 using MyWebForum.Data.Repository.Repositories;
+using System.Data.SqlClient;
 
 namespace MyWebForum.Pages.Post
 {
@@ -42,10 +43,25 @@ namespace MyWebForum.Pages.Post
         {
             IsAdmin = HttpContext.Session.Get<MyWebForum.Models.User>("user").IsAdmin;
             Post = _posts.GetPostById(id);
-            AuthorName = _db.User.First(u => u.Id == Post.UserId).Name;
+            AuthorName = _db.User.Where(u => u.Id == Post.UserId).FirstOrDefault().Name;
             CurrentUserId = HttpContext.Session.Get<MyWebForum.Models.User>("user").Id;
             Mark = _marks.GetPostMark(id);
             Comments = _comments.GetAllAllowedComments(id);
+        }
+
+        public IActionResult OnPostDelete()
+        {
+            if(Post.UserId != HttpContext.Session.Get<Models.User>("user").Id)
+            {
+                return RedirectToPage("/Topic/Index", new { id = Post.PostId });
+            }
+
+            Models.Post post = _posts.GetPostById(Post.PostId);
+
+            _db.Post.Remove(post);
+            _db.SaveChanges();
+
+            return RedirectToPage("/Topic/Index", new { id = Post.PostId });
         }
 
         public IActionResult OnPostLike()

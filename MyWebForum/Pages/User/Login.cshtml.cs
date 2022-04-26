@@ -51,8 +51,6 @@ namespace MyWebForum.Pages.User
             {
                 HttpContext.Session.Set<MyWebForum.Models.User>("user", _users.GetUser(User.Email, User.Password));
 
-                List<MyWebForum.Models.User> users = _users.GetAll().ToList();
-
                 return RedirectToPage("../Index");
             }
 

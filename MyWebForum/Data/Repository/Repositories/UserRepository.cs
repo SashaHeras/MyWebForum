@@ -17,7 +17,7 @@ namespace MyWebForum.Data.Repository.Repositories
 
         public User GetUserById(int id)
         {
-            return GetAll().Where(u=>u.Id == id).FirstOrDefault();
+            return GetAll().Where(u => u.Id == id).FirstOrDefault();
         }
 
         public string GetUserName(User u)

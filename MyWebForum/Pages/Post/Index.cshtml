@@ -44,7 +44,11 @@
                     <a class="btn btn-default" type="submit" style="margin:3px" asp-page="/Post/Edit" asp-route-id="@Model.Post.PostId">Edit post</a>
                 </td>
                 <td style="text-align: right">
-                    <a class="btn btn-danger" type="submit" style="margin:3px;" asp-page="/Post/Delete" asp-route-id="@Model.Post.PostId">Delete p</a>
+                    <form method="post" asp-page-handler="delete">
+                        <input type="hidden" asp-for="@Model.Post.PostId"/>
+                        <input type="hidden" asp-for="@Model.Post.UserId"/>
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
                 </td>
             }
         </tr>
@@ -77,6 +81,7 @@
 </div>
 
 <a class="btn btn-primary" asp-page="/Comment/Create" asp-route-id="@Model.Post.PostId">Create comment</a>
+<br />
 <br />
 <div>
     <div>

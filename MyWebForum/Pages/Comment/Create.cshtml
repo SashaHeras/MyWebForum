@@ -1,0 +1,44 @@
+﻿@page
+@model MyWebForum.Pages.Comment.CreateModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post">
+    <div class="post">
+        <div id="postName">
+            @Model.Post.PostName
+        </div>
+        <div>
+            <div id="postDescription">
+                @Model.Post.Description
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <label asp-for="Comment.CommentText" class="control-label">Comment: </label>
+        <input style="width: 450px;" type="text" asp-for="@Model.Comment.CommentText" class="form-control" />
+        <span asp-validation-for="Comment.CommentText" class="text-danger"></span>
+    </div>
+    <input asp-for="@Model.UserId" type="hidden"/>
+    <input asp-for="@Model.Post.PostId" type="hidden"/>
+    <input asp-for="@Model.Post.PostName" type="hidden"/>
+    <input asp-for="@Model.Post.Description" type="hidden"/>
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-default" />
+    </div>
+</form>
+
+
+
+
