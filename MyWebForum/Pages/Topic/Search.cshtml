@@ -1,0 +1,57 @@
+﻿@page
+@model MyWebForum.Pages.Topic.SearchModel
+
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+@{
+    <table>
+        <tr>
+            <td>
+                <form method="post">
+                    <table>
+                        <tr>
+                            <td><input class="form-control" type="text" asp-for="@Model.Search" style="width: 350px; margin-right: 15px" /></td>
+                            <td><input class="btn btn-default pull-right" type="submit" value="Search" style="margin-left: 15px" /></td>
+                            <td><a class="btn btn-default pull-right" asp-page="../Index" style="margin-left: 15px">Main page</a></td>
+                        </tr>
+                        <tr>
+                            <td><span asp-validation-for="Search" class="text-danger"></span></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+            <td>
+                <div style="margin-left: 15px">
+                    <a class="btn btn-default" asp-page="/Topic/Create" type="submit" >Create new topic</a>
+                    <br>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    if (Model.Topics == null)
+    {
+        <h3 style="text-align: center" >Nothing is found</h3>
+    }
+    else
+    {
+        foreach (var topic in Model.Topics)
+        {
+            <a id="containerTopic" asp-page="/Post/Index" asp-route-id="@topic.TopicId">
+                @topic.TopicName
+            </a>
+            <br><br>
+        }
+    }
+}

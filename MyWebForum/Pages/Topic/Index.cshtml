@@ -1,0 +1,86 @@
+﻿@page
+@model MyWebForum.Pages.Topic.IndexModel
+
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h2 class="cursive-left" style="color: #D2691E; "> All post from topic @Model.TopicName: </h2>
+<br>
+
+<form method="post">
+    <fieldset>
+        <table style="margin-bottom: 15px">
+            <tr>
+                <td>Posts sort: </td>
+                <td>
+                    <select style="margin-left: 5px" id="SortType" name="SortType">
+                        @{
+                            if(Model.SortType == 0)
+                            {
+                                <option selected="selected" value="0">Default</option>
+                            }
+                            else
+                            {
+                                <option value="0">Default</option>
+                            }
+
+                            if(Model.SortType == 1)
+                            {
+                                <option selected="selected" value="1">Views</option>
+                            }
+                            else
+                            {
+                                <option value="1">Views</option>
+                            }
+
+                            if(Model.SortType == 2)
+                            {
+                                <option selected="selected" value="2">Updeted</option>
+                            }
+                            else
+                            {
+                                <option value="2">Updeted</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input class="btn btn-default" style="margin-left: 15px" type="submit" value="Submit" />
+                </td>
+                <td>
+                    <a class="btn btn-default" style="margin-left: 15px" asp-page="/Post/Create" asp-route-id="@Model.TopicId">Create new post</a>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <input type="hidden" asp-for="TopicName" />
+    <input type="hidden" asp-for="TopicId" />
+    <input type="hidden" asp-for="IsAdmin" />
+</form>
+
+@{
+    foreach (var post in Model.Posts)
+    {
+        <a id="containerTopic" asp-page="/Post/Index" asp-route-id="@post.PostId">
+            @post.PostName
+        </a>
+        <br>
+        <br>
+    }
+}
+
+@if(TempData["Success"] != null)
+{
+    <script type="text/javascript">
+        alert("@TempData["Success"]");
+    </script>
+}

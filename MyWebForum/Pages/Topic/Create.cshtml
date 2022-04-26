@@ -1,0 +1,25 @@
+﻿@page
+@model MyWebForum.Pages.Topic.CreateModel
+
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Topic.TopicName" class="control-label">Topic name</label>
+        <input type="text" asp-for="@Model.Topic.TopicName" class="form-control" />
+        <span asp-validation-for="Topic.TopicName" class="text-danger"></span>
+    </div>
+    </br>
+    <div class="form-group">
+        <input class="btn btn-success" type="submit" value="Create" />
+    </div>
+</form>

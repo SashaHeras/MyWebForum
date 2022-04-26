@@ -1,0 +1,99 @@
+﻿@page
+@model MyWebForum.Pages.Post.IndexModel
+
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="post">
+    <div id="postName">
+        @Model.Post.PostName
+    </div>
+    <div id="postAuthor">
+        Author: <a asp-page="/User/UserPosts" asp-route-id="@Model.Post.UserId"> @Model.AuthorName </a>
+    </div>
+    <div id="postAuthor">
+        Updated: @Model.Post.Updated.ToShortDateString()
+    </div>
+    <div id="postAuthor">
+        Views: @Model.Post.Views
+    </div>
+    <br />
+    <div>
+        <div id="postDescription">
+             @Model.Post.Description
+        </div>
+    </div>
+    <br />
+
+    <table style="width: 600px;">
+        <tr>
+            <td>
+                <a class="btn btn-warning" style="margin:3px;" asp-page="/Complaint/Create" asp-route-id="@Model.Post.PostId">Send complaint</a>
+            </td>
+            @if (Model.Post.UserId == Model.CurrentUserId)
+            {
+                <td style="text-align: center">
+                    <a class="btn btn-default" type="submit" style="margin:3px" asp-page="/Post/Edit" asp-route-id="@Model.Post.PostId">Edit post</a>
+                </td>
+                <td style="text-align: right">
+                    <a class="btn btn-danger" type="submit" style="margin:3px;" asp-page="/Post/Delete" asp-route-id="@Model.Post.PostId">Delete p</a>
+                </td>
+            }
+        </tr>
+    </table>
+
+    <br />
+    
+    <div style="font-family: cursive;">
+        <table>
+            <tr><td>Total mark: @Model.Mark</td></tr>
+            <tr>
+                <td>
+                    <form method="post" asp-page-handler="like">
+                        <input type="hidden" asp-for="@Model.Post.PostId"/>
+                        <input type="hidden" asp-for="@Model.CurrentUserId"/>
+                        <input style="border-radius: 8px; margin:5px;" type="submit" value="Like" class="btn btn-default" />
+                    </form>
+                </td>
+                <td>
+                    <form method="post" asp-page-handler="dislike">
+                        <input type="hidden" asp-for="@Model.Post.PostId"/>
+                        <input type="hidden" asp-for="@Model.CurrentUserId"/>
+                        <input style="border-radius: 8px; margin:5px; " type="submit" value="Dislike" class="btn btn-default" />
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+</div>
+
+<a class="btn btn-primary" asp-page="/Comment/Create" asp-route-id="@Model.Post.PostId">Create comment</a>
+<br />
+<div>
+    <div>
+        @{
+            if (Model.Comments != null)
+            {
+                foreach (var comment in Model.Comments)
+                {
+                    <div id="postDescription">
+                        <div>
+                            Author: <a asp-page="/User/UserPosts" asp-route-id="@comment.UserId"> @comment.UserName </a>
+                        </div>
+                        <p>@comment.CommentText</p>
+                    </div>
+                    <br />
+                }
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>MyForum</title>
+
+    <link href="~/mystyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div id="content">
+        <div id="leftSidebar">
+            <h3 id="cursive-center" style="color: #F4A460; margin-left: 5px;">Menu</h3>
+            <a asp-page="/Poll/Index"> Polls </a>
+        </div>
+
+        <div id="header" style="text-align: center">
+            <table width="100%">
+                <tr><td width="91%" style="padding-top: 10px"><a id="styleTitle" asp-page="/Topic/Index">MyForum</a></td><td width="9%" style="padding-top: 10px"><a type="button" asp-page="/User/Index" class="btn btn-link profileLink">My Profile</a></td></tr>
+            </table>
+        </div>
+
+        <div id="main">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
