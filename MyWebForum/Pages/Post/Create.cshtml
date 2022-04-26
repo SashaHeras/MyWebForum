@@ -1,0 +1,31 @@
+﻿@page
+@model MyWebForum.Pages.Post.CreateModel
+
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post" asp-page-handler="add">
+    <div class="form-group">
+        <label asp-for="Post.PostName" class="control-label">Post name:</label>
+        <input type="text" asp-for="@Model.Post.PostName" class="form-control" width="200px" />
+        <span asp-validation-for="Post.PostName" class="text-danger"></span> 
+    </div>
+    <div class="form-group">
+        <label asp-for="Post.Description" class="control-label">Post description:</label>
+        <input type="text" asp-for="@Model.Post.Description" class="form-control" width="80%" />
+        <span asp-validation-for="Post.Description" class="text-danger"></span> 
+    </div>
+    <input asp-for="@Model.Post.UserId" type="hidden"/>
+    <input asp-for="@Model.Post.TopicId" type="hidden"/>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</form>
