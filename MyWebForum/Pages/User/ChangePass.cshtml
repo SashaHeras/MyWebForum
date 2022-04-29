@@ -1,0 +1,44 @@
+﻿@page
+@model MyWebForum.Pages.User.ChangePassModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post">
+    <table>
+        <tr>
+            <td class="form-group" style="padding-left: 8px">
+                <label asp-for="oldPass" class="control-label">Old password:</label>
+                <input type="password" name="oldPass" class="form-control" style="margin:5px"/>
+                <span asp-validation-for="oldPass" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr style="margin:5px">
+            <td class="form-group" style="padding-left: 8px">
+                <label asp-for="newPass" class="control-label">New password:</label>
+                <input type="password" name="newPass" class="form-control" style="margin:5px"/>
+                <span asp-validation-for="newPass" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr style="margin:5px">
+            <td class="form-group" style="padding-left: 8px">
+                <label asp-for="newPassConfign" class="control-label">Confign new password:</label>
+                <input type="password" name="newPassConfign" class="form-control" style="margin:5px"/>
+                <span asp-validation-for="newPassConfign" class="text-danger"></span>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div class="form-group" style="margin: 5px">
+        <input type="submit" style="width: 100px" value="Change" class="btn btn-default" />
+    </div>
+</form>
+
+

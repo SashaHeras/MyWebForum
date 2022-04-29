@@ -10,9 +10,11 @@ namespace MyWebForum.Data.Repository.Repositories
 {
     public class MarkRepository : Repository<UserPostMark>, IMarkRepository
     {
+        private MyForumContext _db;
+
         public MarkRepository(MyForumContext forumContext) : base(forumContext)
         {
-
+            _db = forumContext;
         }
 
         public UserPostMark GetMarkById(int id)
@@ -38,6 +40,20 @@ namespace MyWebForum.Data.Repository.Repositories
         public UserPostMark GetUsersMarkById(int id)
         {
             return GetAll().Where(m => m.UserId == id).FirstOrDefault();
+        }
+
+        public double GetAverageUserPostMark(int id)
+        {
+            double avg = 0;
+
+            IEnumerable<Models.Post> posts = _db.Post.Where(p => p.UserId == id);
+
+            foreach(var post in posts)
+            {
+                avg += _db.Mark.Where(m => m.PostId == post.PostId).Sum(p => p.PostMark);
+            }
+
+            return Math.Round((avg / posts.Count()), 2);
         }
     }
 }

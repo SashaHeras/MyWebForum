@@ -15,6 +15,29 @@
 <h2 class="cursive-left" style="color: #D2691E; "> All post from topic @Model.TopicName: </h2>
 <br>
 
+<form method="post" asp-page-handler="search">
+    <table>
+        <tr>
+            <td><input class="form-control" type="text" asp-for="@Model.Search" style="width: 350px; margin-right: 15px" /></td>
+            <td><input class="btn btn-default pull-right" type="submit" value="Search" style="margin-left: 15px" /></td>
+            <td><a class="btn btn-default pull-right" asp-page="../Index" style="margin-left: 15px">Main page</a></td>
+            <td><a class="btn btn-default" asp-page="/Post/Create" asp-route-id="@Model.TopicId" style="margin-left: 15px" >Create new post</a></td>
+        </tr>
+        <tr>
+            <td><span asp-validation-for="Search" class="text-danger"></span></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+   </table>
+
+   <input type="hidden" asp-for="TopicName" />
+   <input type="hidden" asp-for="TopicId" />
+   <input type="hidden" asp-for="IsAdmin" />
+</form>
+
+<br />
+
 <form method="post">
     <fieldset>
         <table style="margin-bottom: 15px">
@@ -54,9 +77,6 @@
                 </td>
                 <td>
                     <input class="btn btn-default" style="margin-left: 15px" type="submit" value="Submit" />
-                </td>
-                <td>
-                    <a class="btn btn-default" style="margin-left: 15px" asp-page="/Post/Create" asp-route-id="@Model.TopicId">Create new post</a>
                 </td>
             </tr>
         </table>

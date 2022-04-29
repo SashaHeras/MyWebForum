@@ -1,0 +1,27 @@
+﻿@page
+@model MyWebForum.Pages.User.UserPostsModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h2 class="cursive-left" style="color: #D2691E; "> All post made by @Model.UserName: </h2><br>
+
+<p> Posts` mark average:  @Model.AverageMark </p>
+
+@{
+    foreach (var post in Model.Posts)
+    {
+        <a id="containerTopic" asp-page="/Post/Post" asp-route-id="@post.PostId">
+            @post.PostName
+        </a>
+        <br>
+        <br>
+    }
+}

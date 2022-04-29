@@ -1,0 +1,31 @@
+﻿@page
+@model MyWebForum.Pages.User.VerificationModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.SecretPass" />
+    <input type="hidden" asp-for="@Model.IsAdmin" />
+    <input type="hidden" asp-for="@Model.UserId" />
+    <table>
+        <tr>
+            <td class="form-group" style="padding-left: 8px">
+                <input type="text" name="pass" class="form-control" style="margin: 3px"/>
+                <span asp-validation-for="SecretPass" class="text-danger"></span>
+            </td>
+            <td style="margin:5px">
+                <div class="form-group" style="margin: 5px">
+                    <input class="btn btn-success" type="submit" style="width: 100px" value="Verify"  />
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

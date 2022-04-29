@@ -23,6 +23,8 @@ namespace MyWebForum.Pages.Topic
 
         public int SortType { get; set; }
 
+        public string Search { get; set; }
+
         public IndexModel(MyForumContext db)
         {
             _db = db;
@@ -53,6 +55,26 @@ namespace MyWebForum.Pages.Topic
             {
                 Posts = _posts.GetAllowedPostsByTopicId(TopicId);
             }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostSearch()
+        {
+            ModelState.Clear();
+            if(Search == null || Search.Length == 0)
+            {
+                ModelState.AddModelError("Search", "Enter name to search!");
+            }
+
+            if(ModelState.IsValid)
+            {
+                Posts = _posts.GetAll().Where(p => p.TopicId == TopicId && p.PostName.Contains(Search) == true && p.IsAllow == true);
+
+                return Page();
+            }
+
+            Posts = _posts.GetAllowedPostsByTopicId(TopicId);
 
             return Page();
         }

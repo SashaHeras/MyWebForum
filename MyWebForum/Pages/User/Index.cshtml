@@ -16,21 +16,17 @@
 
 <img src="@TempData["Picture"]" width="200px" height="200px" style="margin: 5px; border-radius: 8px; border: 3px solid #F8F8FF;"/>
 
-@using (Html.BeginForm("AddPicture", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
+<form method="post" asp-page-handler="upload" enctype = "multipart/form-data">
     <fieldset style="margin-left: 10px">
         <b style="margin: 10px;">Add picture</b>
-
         <div class="editor-field" style="margin: 10px;">
-           <input type="file" name="uploadImage" />
+           <input class="btn btn-default" type="file" asp-for="@Model.Picture" />
+           <span asp-validation-for="Picture" class="text-danger"></span>
         </div>
-        
-        <p>
-            <input type="submit" class="btn btn-success" style="margin: 5px; color:white;" value="Add" />
-        </p>
+        <input class="btn btn-success" type="submit" value="Submit" />
     </fieldset>
-}
+</form>
+<br />
 
 <div style="margin-left: 10px">
     <table>
@@ -44,14 +40,14 @@
 </div>
 
 <br />
-<a class="btn btn-primary" style="margin: 10px" asp-page="/User/ChangeData">Change data</a>
+<a class="btn btn-primary" style="margin: 10px" asp-page="/User/ChangeOwnData">Change data</a>
 <a class="btn btn-primary" style="margin: 10px" asp-page="/User/ChangePass">Change password</a>
 @{
     if (Model.User.IsVerified == false)
     {
-        <a class="btn btn-default" style="margin: 10px" asp-page="/User/Verification">Verification</a>
+        <a class="btn btn-default" style="margin: 10px" asp-page="/User/Verification" asp-route-id="@Model.User.Id">Verification</a>
     }else{
-        <div class="btn btn-default" style="margin: 10px">You carificated</div>
+        <div class="btn btn-success" style="margin: 10px">You varificated</div>
     }
 }
 <br />

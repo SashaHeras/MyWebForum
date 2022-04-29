@@ -1,0 +1,54 @@
+﻿@page
+@model MyWebForum.Pages.Admin.CommentsListModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h4> All comments </h4>
+
+ <table class="table">
+            <thead>
+                <tr>
+                    <td><b>#</b></td>
+                    <td><b>Author</b></td>
+                    <td><b>Text</b></td>
+                    <td><b>Action</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach(var comment in Model.Comments)
+                    {
+                        <tr>
+                            <td>@comment.CommentId</td>
+                            <td><a asp-page="/User/UserPosts" asp-route-id="@comment.UserId">@comment.UserName</a></td>
+                            <td>@comment.CommentText</td>
+                            <td width="20%">
+                                  @{
+                                      if(comment.IsAllow == true){
+                                          <form method="post" asp-page-handler="disallow" asp-route-id="@comment.CommentId">
+                                            <input class="btn btn-warning" type="submit" value="Disallow"/>
+                                          </form>
+                                      }
+                                      else{
+                                          <form method="post" asp-page-handler="allow" asp-route-id="@comment.CommentId">
+                                            <input class="btn btn-success" type="submit" value="Allow"/>
+                                          </form>
+                                      }
+                                  }
+                                  <form method="post" asp-page-handler="delete" asp-route-id="@comment.CommentId">
+                                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                                  </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>

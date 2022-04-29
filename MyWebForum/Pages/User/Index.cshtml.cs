@@ -15,6 +15,8 @@ namespace MyWebForum.Pages.User
 
         public IEnumerable<MyWebForum.Models.Post> Posts { get; set; }
 
+        public IFormFile Picture { get; set; }
+
         public IndexModel(MyForumContext db)
         {
             _db = db;
@@ -47,6 +49,37 @@ namespace MyWebForum.Pages.User
         public async Task<IActionResult> OnPost()
         {
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostUpload()
+        {
+            if(Picture == null)
+            {
+                ModelState.AddModelError("Picture", "Put a picture");
+            }
+            if (ModelState.IsValid)
+            {
+                byte[] imageData = null;
+
+                using (var binaryReader = new BinaryReader(Picture.OpenReadStream()))
+                {
+                    long f = Picture.Length;
+                    int c = Convert.ToInt32(Picture.Length);
+                    imageData = binaryReader.ReadBytes(c);
+                }
+
+                User.Picture = imageData;
+
+                _db.User.Update(User);
+                _db.SaveChanges();
+
+                HttpContext.Session.Remove("user");
+                HttpContext.Session.Set<Models.User>("user", User);
+
+                return RedirectToPage("Index");
+            }
+
+            return RedirectToPage("Index");
         }
     }
 }

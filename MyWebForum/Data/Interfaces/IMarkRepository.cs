@@ -19,5 +19,7 @@ namespace MyWebForum.Data.Interfaces
         public int GetPostMark(int id);
 
         public UserPostMark GetMarkByUserAndPostId(int ui, int pi);
+
+        public double GetAverageUserPostMark(int id);
     }
 }
