@@ -12,5 +12,7 @@ namespace MyWebForum.Data.Interfaces
         public User GetUser(string email, string password);
 
         public string GetUserNameById(int id);
+
+        public IEnumerable<User> GetAllWithoutUser(int id);
     }
 }

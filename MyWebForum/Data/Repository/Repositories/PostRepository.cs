@@ -19,7 +19,7 @@ namespace MyWebForum.Data.Repository.Repositories
 
         public IEnumerable<Post> GetPopularAllowedPosts(int n)
         {
-            return GetAll().OrderByDescending(p => p.Views).Take(n);
+            return GetAll().Where(p => p.IsAllow == true).OrderByDescending(p => p.Views).Take(n);
         }
 
         public Post GetPostById(int id)

@@ -1,0 +1,63 @@
+﻿@page
+@model MyWebForum.Pages.Poll.IndexModel
+@{ 
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h2 class="cursive-left" style="color: #D2691E;"> @Model.Poll.Name </h2>
+
+<div style="color: #D2691E; "> @Model.Poll.Description </div>
+
+        <table class="table">
+            <tbody>
+                @{
+                    foreach(var question in Model.Questions)
+                    {
+                        <tr>
+                        <td>@question.Name</td>
+                        <td>@question.CountAnswers</td>
+                            <td>
+                                  @{
+                                      if(Model.UserAnswer != question.Id){
+                                          <form method="post" asp-page-handler="answer" asp-route-id="@question.Id">
+                                            <input type="hidden" name="UserId" value="@Model.UserId"/>
+                                            <input type="hidden" name="PollId" value="@Model.Poll.Id"/>
+                                            <button type="submit" class="btn btn-success">Answer</button>
+                                          </form>
+                                      }
+                                      else{
+                                          <div style="color: green">Your answer!</div>
+                                      }
+                                  }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <br />
+
+@{
+    if(Model.UserId == Model.Poll.UserId)
+    {
+        <table>
+            <tr>
+                <td>
+                    <a class="btn btn-warning" asp-page="/Poll/Edit" asp-route-id="@Model.Poll.Id"> Edit</a>
+                </td>
+                <td style="padding-left: 10px">
+                    <form method="post" asp-page-handler="delete" asp-route-id="@Model.Poll.Id">
+                        <input type="submit" class="btn btn-danger" value="Delete"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    }    
+}

@@ -1,0 +1,21 @@
+﻿@page
+@model MyWebForum.Pages.Poll.SetCountOfQuestionsModel
+@{ 
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h2 class="cursive-left" style="color: #D2691E; "> Set count of questions </h2>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.IsAdmin" />
+    <input class="form-control" type="number" asp-for="@Model.Count"/>
+    <span asp-validation-for="Count" class="text-danger"/>
+    <button type="submit" class="btn btn-default">Next</button>
+</form>

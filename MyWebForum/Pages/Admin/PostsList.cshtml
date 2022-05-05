@@ -1,0 +1,60 @@
+﻿@page
+@model MyWebForum.Pages.Admin.PostsListModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h4> All posts </h4>
+
+ <table class="table">
+            <thead>
+                <tr>
+                    <td><b>#</b></td>
+                    <td><b>Author</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Text</b></td>
+                    <td><b>Updated</b></td>
+                    <td><b>Action</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach(var post in Model.Posts)
+                    {
+                        <tr>
+                            <td width="6%">@post.PostId</td>
+                            <td width="8%"><a asp-page="/User/UserPosts" asp-route-id="@post.UserId">Go to author posts</a></td>
+                            <td width="14%">@post.PostName</td>
+                            <td style="width:550px">@post.Description</td>
+                            <td width="12%">@post.Updated.ToShortDateString()</td>
+                            <td>
+                                  @{
+                                      if(post.IsAllow == true){
+                                          <form method="post" asp-page-handler="disallow" asp-route-id="@post.PostId">
+                                            <input class="btn btn-warning" type="submit" value="Disallow"/>
+                                          </form>
+                                      }
+                                      else{
+                                          <form method="post" asp-page-handler="allow" asp-route-id="@post.PostId">
+                                            <input class="btn btn-success" type="submit" value="Allow"/>
+                                          </form>
+                                      }
+                                  }
+                            </td>
+                            <td>
+                                <form method="post" asp-page-handler="delete" asp-route-id="@post.PostId">
+                                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>

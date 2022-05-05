@@ -1,0 +1,46 @@
+﻿@page
+@model MyWebForum.Pages.Poll.CreateModel
+@{ 
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Poll.Name" class="control-label">Poll name</label>
+        <input type="text" asp-for="@Model.Poll.Name" class="form-control" />
+        <span asp-validation-for="Poll.Name" class="text-danger"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Poll.Description" class="control-label">Description</label>
+        <input asp-for="@Model.Poll.Description" class="form-control"></input>
+        <span asp-validation-for="Poll.Description" class="text-danger"/>
+    </div>
+
+    @{
+        foreach(var i in Model.Numbers)
+        {
+            <div class="form-group">
+                <label class="control-label">Question №@i</label>
+                <input type="text" name="@i" class="form-control" width="350px">
+            </div>
+        }
+    }
+
+    <input type="hidden" asp-for="@Model.Poll.Id"/>
+    <input type="hidden" asp-for="@Model.UserId"/>
+    <input type="hidden" asp-for="@Model.CountQuestions"/>
+    <input type="hidden" asp-for="@Model.IsAdmin"/>
+    <input type="hidden" asp-for="@Model.Poll.CountQuestions"/>
+    <input type="hidden" asp-for="@Model.Poll.UserId"/>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</form>

@@ -1,0 +1,41 @@
+﻿@page
+@model MyWebForum.Pages.Admin.CompaintsListModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h4> All complaints </h4>
+
+ <table class="table">
+            <thead>
+                <tr>
+                    <td><b>#</b></td>
+                    <td><b>Description</b></td>
+                    <td><b>Go to post</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach(var complaint in Model.Complaints)
+                    {
+                        <tr>
+                        <td>@complaint.Id</td>
+                        <td>@complaint.Description</td>
+                        <td><a class="btn btn-default" asp-page="/Post/Index" asp-route-id="@complaint.PostId">Go to post</a></td>
+                        <td>
+                            <form method="post" asp-page-handler="delete" asp-route-id="@complaint.Id">
+                                <input class="btn btn-danger" type="submit" value="Delete"/>
+                            </form>
+                        </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>

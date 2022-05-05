@@ -1,0 +1,54 @@
+﻿@page
+@model MyWebForum.Pages.Admin.CreateUserModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="User.Name" class="control-label"><b>Name:</b></label>
+        <input type="text" asp-for="@Model.User.Name" class="form-control" />
+        <span asp-validation-for="User.Name" class="text-danger"></span>
+    </div>
+    </br>
+    <div class="form-group">
+        <label asp-for="User.Surname" class="control-label"><b>Surname:</b></label>
+        <input type="text" asp-for="@Model.User.Surname" class="form-control" />
+        <span asp-validation-for="User.Surname" class="text-danger"></span>
+    </div>
+    </br>
+    <div class="form-group">
+        <label asp-for="User.Age" class="control-label"><b>Age:</b></label>
+        <input type="number" asp-for="@Model.User.Age" class="form-control" />
+        <span asp-validation-for="User.Age" class="text-danger"></span>
+    </div>
+    </br>
+    <div class="form-group">
+        <label asp-for="User.Address" class="control-label"><b>Address:</b></label>
+        <input type="text" asp-for="@Model.User.Address" class="form-control" />
+        <span asp-validation-for="User.Address" class="text-danger"></span>
+    </div>
+    </br>
+    <div class="form-group">
+        <label asp-for="User.Email" class="control-label"><b>E-mail:</b></label>
+        <input type="text" asp-for="@Model.User.Email" class="form-control" />
+        <span asp-validation-for="User.Email" class="text-danger"></span>
+    </div>
+    </br>
+    <div class="form-group">
+        <label asp-for="User.Password" class="control-label"><b>Password:</b></label>
+        <input type="password" asp-for="@Model.User.Password" class="form-control" />
+        <span asp-validation-for="User.Password" class="text-danger"></span>
+    </div>
+    </br>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</form>

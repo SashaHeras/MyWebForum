@@ -1,0 +1,58 @@
+﻿@page
+@model MyWebForum.Pages.Admin.UsersListModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h4> All users </h4>
+
+ <table class="table">
+            <thead>
+                <tr>
+                    <td><b>#</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Surname</b></td>
+                    <td><b>Email</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach(var user in Model.Users)
+                    {
+                        <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Name</td>
+                        <td>@user.Surname</td>
+                        <td>@user.Email</td>
+                            <td>
+                                  @{
+                                      if(user.IsAdmin == true){
+                                          <form method="post" asp-page-handler="pikuprights" asp-route-id="@user.Id">
+                                            <input class="btn btn-warning" type="submit" value="Pick up rights"/>
+                                          </form>
+                                      }
+                                      else{
+                                          <form method="post" asp-page-handler="giverights" asp-route-id="@user.Id">
+                                            <input class="btn btn-success" type="submit" value="Give rights"/>
+                                          </form>
+                                      }
+                                  }
+                                  <form method="post" asp-page-handler="delete" asp-route-id="@user.Id">
+                                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                                  </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                <tr>
+                    <td><a class="btn btn-default" asp-page="/Admin/CreateUser">Create user</a></td>
+                </tr>
+            </tbody>
+        </table>

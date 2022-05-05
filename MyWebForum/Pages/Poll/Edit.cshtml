@@ -1,0 +1,88 @@
+﻿@page
+@model MyWebForum.Pages.Poll.EditModel
+
+@{ 
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<form method="post" asp-page-handler="editpoll">
+    <div class="form-group">
+        <label asp-for="Poll.Name" class="control-label">Poll name</label>
+        <input type="text" asp-for="@Model.Poll.Name" class="form-control" />
+        <span asp-validation-for="Poll.Name" class="text-danger"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Poll.Description" class="control-label">Description</label>
+        <input asp-for="@Model.Poll.Description" class="form-control"></input>
+        <span asp-validation-for="Poll.Description" class="text-danger"/>
+    </div>
+
+    <input type="hidden" asp-for="@Model.Poll.Id"/>
+    <input type="hidden" asp-for="@Model.Poll.CountQuestions"/>
+    <input type="hidden" asp-for="@Model.Poll.UserId"/>
+    <input type="hidden" asp-for="@Model.Poll.CountViews"/>
+    <input type="hidden" asp-for="@Model.UserId"/>
+    <input type="hidden" asp-for="@Model.CountQuestions"/>
+    <input type="hidden" asp-for="@Model.IsAdmin"/>
+
+    <div class="form-group">
+        <input type="submit" value="Update poll" class="btn btn-default" />
+    </div>
+    <br />
+</form>
+
+<div>
+    <form method="post" asp-page-handler="addquestion">
+        <input type="hidden" name="id" asp-for="@Model.Poll.Id"/>
+        <input type="hidden" asp-for="@Model.Poll.CountQuestions"/>
+        <input type="hidden" asp-for="@Model.Poll.UserId"/>
+        <input type="hidden" asp-for="@Model.Poll.CountViews"/>
+        <input type="hidden" asp-for="@Model.UserId"/>
+        <input type="hidden" asp-for="@Model.CountQuestions"/>
+        <input type="hidden" asp-for="@Model.IsAdmin"/>
+        <button class="btn btn-primary">Add questions</button>
+    </form>
+</div>
+
+<form method="post" asp-page-handler="editquestions">
+    @{
+        foreach(var i in Model.Questions)
+        {
+            <div class="form-group">
+                <label class="control-label">Question:</label>
+                <table>
+                    <tr>
+                        <td>
+                            <input style="width: 350px" type="text" name="@i.Id" value="@i.Name" class="form-control">
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" style="margin-left: 10px" asp-page="/Question/Delete" asp-route-id="@i.Id">Delete</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+    }
+
+    <input type="hidden" asp-for="@Model.Poll.Id"/>
+    <input type="hidden" asp-for="@Model.Poll.CountQuestions"/>
+    <input type="hidden" asp-for="@Model.Poll.UserId"/>
+    <input type="hidden" asp-for="@Model.Poll.CountViews"/>
+    <input type="hidden" asp-for="@Model.UserId"/>
+    <input type="hidden" asp-for="@Model.CountQuestions"/>
+    <input type="hidden" asp-for="@Model.IsAdmin"/>
+
+    <div class="form-group">
+        <input type="submit" value="Update questions" class="btn btn-default" />
+    </div>
+</form>
+    
+
+

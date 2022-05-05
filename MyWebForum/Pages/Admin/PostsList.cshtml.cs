@@ -8,58 +8,57 @@ using MyWebForum.Data.Repository.Repositories;
 
 namespace MyWebForum.Pages.Admin
 {
-    [BindProperties]
-    public class CommentsListModel : PageModel
+    public class PostsListModel : PageModel
     {
         private MyForumContext _db;
-        private ICommentRepository _comments;
+        private IPostRepository _posts;
 
-        public IEnumerable<Models.Comment> Comments { get; set; }
+        public IEnumerable<Models.Post> Posts { get; set;}
 
         public bool IsAdmin { get; set; }
 
-        public CommentsListModel(MyForumContext db)
+        public PostsListModel(MyForumContext db)
         {
             _db = db;
-            _comments = new CommentRepository(db);
+            _posts = new PostRepository(db);
         }
 
         public void OnGet()
         {
-            Comments = _comments.GetAll();
+            Posts = _posts.GetAll();
             IsAdmin = HttpContext.Session.Get<Models.User>("user").IsAdmin;
         }
 
         public IActionResult OnPostDisallow(int id)
         {
-            Models.Comment com = _comments.GetCommentById(id);
-            com.IsAllow = false;
+            Models.Post post = _posts.GetPostById(id);
+            post.IsAllow = false;
 
-            _db.Comment.Update(com);
+            _db.Post.Update(post);
             _db.SaveChanges();
 
-            return RedirectToPage("CommentsList");
+            return RedirectToPage("PostsList");
         }
 
         public IActionResult OnPostAllow(int id)
         {
-            Models.Comment com = _comments.GetCommentById(id);
-            com.IsAllow = true;
+            Models.Post post = _posts.GetPostById(id);
+            post.IsAllow = true;
 
-            _db.Comment.Update(com);
+            _db.Post.Update(post);
             _db.SaveChanges();
 
-            return RedirectToPage("CommentsList");
+            return RedirectToPage("PostsList");
         }
 
         public IActionResult OnPostDelete(int id)
         {
-            Models.Comment com = _comments.GetCommentById(id);
+            Models.Post post = _posts.GetPostById(id);
 
-            _db.Comment.Remove(com);
+            _db.Post.Remove(post);
             _db.SaveChanges();
 
-            return RedirectToPage("CommentsList");
+            return RedirectToPage("PostsList");
         }
     }
 }
