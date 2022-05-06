@@ -40,5 +40,15 @@ namespace MyWebForum.Pages
 
             return Page();
         }
+
+        public IActionResult OnPostSearchPost()
+        {
+            if(Request.Form["Search"].ToString() != null)
+            {
+                return RedirectToPage("/Post/Search", new { search = Request.Form["Search"].ToString() });
+            }
+
+            return RedirectToPage("Index");
+        }
     }
 }

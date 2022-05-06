@@ -25,7 +25,7 @@ namespace MyWebForum.Pages.User
 
         public void OnGet()
         {
-            
+            HttpContext.Session.Remove("user");
         }
 
         public async Task<IActionResult> OnPost()

@@ -51,6 +51,7 @@ namespace MyWebForum.Pages.Post
             if (ModelState.IsValid)
             {
                 Post.Updated = DateTime.Today;
+                Post.IsAllow = false;
 
                 _db.Post.Update(Post);
                 _db.SaveChanges();

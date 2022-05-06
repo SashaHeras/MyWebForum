@@ -22,8 +22,13 @@ namespace MyWebForum.Pages.User
             _db = db;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.Keys.FirstOrDefault(k => k == "user") == null)
+            {
+                return RedirectToPage("Login");
+            }
+
             User = HttpContext.Session.Get<MyWebForum.Models.User>("user");
             Posts = _db.Post.Where(p => p.UserId == User.Id);
 
@@ -44,6 +49,8 @@ namespace MyWebForum.Pages.User
                 var base64 = Convert.ToBase64String(User.Picture);
                 TempData["Picture"] = String.Format("data:image/jpg;base64,{0}", base64);
             }
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPost()

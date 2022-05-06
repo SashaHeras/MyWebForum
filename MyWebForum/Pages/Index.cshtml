@@ -14,15 +14,14 @@
 <h2 class="cursive-left" style="color: #D2691E; "> Popular posts: </h2>
 <br>
 
-@using (Html.BeginForm("SearchPosts", "Post", FormMethod.Post, "Search"))
-{
+<form method="post" asp-page-handler="searchPost">
     <table>
         <tr>    
             <td><input class="form-control" type="text" name="Search" style="width: 350px; margin-right: 15px" /></td>
             <td><input class="btn btn-default pull-right" type="submit" value="Search" /></td>
         </tr>
     </table>
-}  
+</form>
 
 <br />
 

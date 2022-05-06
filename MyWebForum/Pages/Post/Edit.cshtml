@@ -23,7 +23,10 @@
         <input type="text" asp-for="@Model.Post.Description" class="form-control" width="80%" />
         <span asp-validation-for="Post.Description" class="text-danger"></span> 
     </div>
+
+    <input asp-for="@Model.Post.PostId" type="hidden"/>
     <input asp-for="@Model.Post.UserId" type="hidden"/>
+    <input asp-for="@Model.Post.Views" type="hidden"/>
     <input asp-for="@Model.Post.TopicId" type="hidden"/>
     <div class="form-group">
         <input type="submit" value="Update" class="btn btn-default" />

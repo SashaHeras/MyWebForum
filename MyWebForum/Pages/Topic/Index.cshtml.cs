@@ -69,7 +69,7 @@ namespace MyWebForum.Pages.Topic
 
             if(ModelState.IsValid)
             {
-                Posts = _posts.GetAll().Where(p => p.TopicId == TopicId && p.PostName.Contains(Search) == true && p.IsAllow == true);
+                Posts = _posts.GetAllowedPostsByTopicId(TopicId).Where(p => p.PostName.Contains(Search) == true);
 
                 return Page();
             }
