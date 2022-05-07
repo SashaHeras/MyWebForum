@@ -28,9 +28,11 @@
 @{
     foreach (var post in Model.Posts)
     {
-        <a id="containerTopic" asp-page="/Post/Index" asp-route-id="@post.PostId">
-            @post.PostName
-        </a>
+        <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px">
+            <a asp-page="/Post/Index" asp-route-id="@post.PostId">
+                @post.PostName
+            </a>
+        </div>        
         <br>
         <br>
     }
@@ -55,11 +57,14 @@
     </table>
     <br>
 
-    foreach (var topic in Model.Topics)
+    foreach (var topic in Model.ShowTopics)
     {
-        <a id="containerTopic" asp-page="/Topic/Index" asp-route-id="@topic.TopicId">
-            @topic.TopicName
-        </a>
+        <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px">
+            <a  asp-page="/Topic/Index" asp-route-id="@topic.TopicId">
+                @topic.TopicName
+            </a>
+            <div class="pull-right">@topic.CountPosts</div>
+        </div>        
         <br><br>
     }
 }

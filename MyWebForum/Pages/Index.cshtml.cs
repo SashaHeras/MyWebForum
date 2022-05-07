@@ -17,7 +17,9 @@ namespace MyWebForum.Pages
         public bool IsAdmin { get; set; }
 
         public IEnumerable<MyWebForum.Models.Post> Posts { get; set; }
-        public IEnumerable<MyWebForum.Models.Topic> Topics { get; set; }
+        private IEnumerable<MyWebForum.Models.Topic> Topics { get; set; }
+
+        public IEnumerable<ShowTopic> ShowTopics { get; set; }
 
 
         public IndexModel(MyForumContext db)
@@ -36,7 +38,17 @@ namespace MyWebForum.Pages
 
             IsAdmin = HttpContext.Session.Get<MyWebForum.Models.User>("user").IsAdmin;
             Posts = _posts.GetPopularAllowedPosts(5);
+            
             Topics = _topics.GetAllowedTopics();
+
+            List<ShowTopic> list = new List<ShowTopic>();
+
+            foreach(Models.Topic topic in Topics)
+            {
+                list.Add(new ShowTopic(topic, _posts.GetAllowedPostsByTopicId(topic.TopicId).Count()));
+            }
+
+            ShowTopics = list.AsQueryable();
 
             return Page();
         }
@@ -49,6 +61,19 @@ namespace MyWebForum.Pages
             }
 
             return RedirectToPage("Index");
+        }
+    }
+
+    public class ShowTopic :Models.Topic
+    {
+        public int CountPosts { get; set; }
+
+        public ShowTopic(Models.Topic topic,int count)
+        {
+            this.TopicName = topic.TopicName;
+            this.TopicId = topic.TopicId;
+            this.IsAllow = topic.IsAllow;
+            this.CountPosts = count;
         }
     }
 }

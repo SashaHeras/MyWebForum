@@ -33,11 +33,14 @@
                                       if(topic.IsAllow == true){
                                           <form method="post" asp-page-handler="disallow" asp-route-id="@topic.TopicId">
                                             <input class="btn btn-warning" type="submit" value="Disallow"/>
+
+                                            <input type="hidden" asp-for="@Model.IsAdmin">
                                           </form>
                                       }
                                       else{
                                           <form method="post" asp-page-handler="allow" asp-route-id="@topic.TopicId">
                                             <input class="btn btn-success" type="submit" value="Allow"/>
+                                            <input type="hidden" asp-for="@Model.IsAdmin">
                                           </form>
                                       }
                                   }
@@ -45,6 +48,7 @@
                             <td>
                                 <form method="post" asp-page-handler="delete" asp-route-id="@topic.TopicId">
                                     <input class="btn btn-danger" type="submit" value="Delete"/>
+                                    <input type="hidden" asp-for="@Model.IsAdmin">
                                   </form>
                             </td>
                         </tr>

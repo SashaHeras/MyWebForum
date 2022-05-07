@@ -207,6 +207,13 @@ input[type="submit"].wysija-submit {
     color: steelblue;
 }
 
+.postContainer {
+    background-color: white;
+    width: 400px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
 .profileLink {
     font-family: cursive;
     color: #D2691E;
