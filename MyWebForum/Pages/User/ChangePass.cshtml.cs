@@ -77,6 +77,8 @@ namespace MyWebForum.Pages.User
 
                 HttpContext.Session.Set<Models.User>("user", u);
 
+                TempData["Success"] = "You password updated successfuly!";
+
                 return RedirectToPage("Index");
             }
 

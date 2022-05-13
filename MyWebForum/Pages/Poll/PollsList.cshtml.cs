@@ -26,7 +26,7 @@ namespace MyWebForum.Pages.Poll
 
         public void OnGet()
         {
-            Polls = _polls.GetAll();
+            Polls = _polls.GetAll().Where(p => p.IsAllowed == true);
             IsAdmin = HttpContext.Session.Get<Models.User>("user").IsAdmin;
         }
     }

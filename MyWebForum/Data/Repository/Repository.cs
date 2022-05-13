@@ -9,11 +9,13 @@ namespace MyWebForum.Data.Repository.Repositories
     {
         private readonly MyForumContext repositoryContext;
 
+        // Конструктор
         public Repository(MyForumContext repositoryContext)
         {
             this.repositoryContext = repositoryContext;
         }
 
+        // Витягує всі об'єкти вказаного типу з бд
         public IQueryable<TEntity> GetAll()
         {
             try
@@ -26,6 +28,7 @@ namespace MyWebForum.Data.Repository.Repositories
             }
         }
 
+        // Додає новий об'єкт
         public async Task<TEntity> AddAsync(TEntity entity)
         {
             if (entity == null)
@@ -46,6 +49,7 @@ namespace MyWebForum.Data.Repository.Repositories
             }
         }
 
+        // Оновлює дані об'єкта
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             if (entity == null)

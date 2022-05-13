@@ -56,6 +56,8 @@ namespace MyWebForum.Pages.Post
                 _db.Post.Update(Post);
                 _db.SaveChanges();
 
+                TempData["Success"] = "Post editted successfuly!";
+
                 return RedirectToPage("Index", new { id = Post.PostId });
             }
 

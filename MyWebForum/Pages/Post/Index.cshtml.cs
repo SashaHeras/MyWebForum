@@ -61,6 +61,8 @@ namespace MyWebForum.Pages.Post
             _db.Post.Remove(post);
             _db.SaveChanges();
 
+            TempData["Success"] = "Post deleted successfuly!";
+
             return RedirectToPage("/Topic/Index", new { id = Post.PostId });
         }
 

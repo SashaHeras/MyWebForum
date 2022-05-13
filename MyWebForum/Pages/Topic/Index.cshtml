@@ -90,8 +90,8 @@
 @{
     foreach (var post in Model.Posts)
     {
-        <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px">
-            <a id="containerTopic" asp-page="/Post/Index" asp-route-id="@post.PostId">
+        <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px" >
+            <a id="containerTopic" asp-page="/Post/Index" asp-route-id="@post.PostId" style="color: #F4A460; font-family: cursive;">
                 @post.PostName
             </a>
         </div>        

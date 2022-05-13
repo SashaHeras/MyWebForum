@@ -15,5 +15,7 @@ namespace MyWebForum.Models
         public int PollId { get; set; }
 
         public int CountAnswers { get; set; }
+
+        public bool Saved { get; set; }
     }
 }

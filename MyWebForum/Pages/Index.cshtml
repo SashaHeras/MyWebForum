@@ -29,7 +29,7 @@
     foreach (var post in Model.Posts)
     {
         <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px">
-            <a asp-page="/Post/Index" asp-route-id="@post.PostId">
+            <a asp-page="/Post/Index" asp-route-id="@post.PostId" style="color: #F4A460; font-family: cursive;">
                 @post.PostName
             </a>
         </div>        
@@ -60,11 +60,17 @@
     foreach (var topic in Model.ShowTopics)
     {
         <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px">
-            <a  asp-page="/Topic/Index" asp-route-id="@topic.TopicId">
+            <a  asp-page="/Topic/Index" asp-route-id="@topic.TopicId" style="color: #F4A460; font-family: cursive;">
                 @topic.TopicName
             </a>
-            <div class="pull-right">@topic.CountPosts</div>
+            <div class="pull-right" style="color: #F4A460; font-family: cursive;">@topic.CountPosts</div>
         </div>        
         <br><br>
     }
+}
+@if(TempData["Success"] != null)
+{
+    <script type="text/javascript">
+        alert("@TempData["Success"]");
+    </script>
 }

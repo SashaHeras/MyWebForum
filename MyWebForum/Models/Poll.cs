@@ -19,5 +19,7 @@ namespace MyWebForum.Models
         public int CountQuestions { get; set; }
 
         public int UserId { get; set; }
+
+        public bool IsAllowed { get; set; }
     }
 }

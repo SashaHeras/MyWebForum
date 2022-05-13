@@ -37,10 +37,11 @@ namespace MyWebForum.Pages.Poll
         public void OnGet(int id)
         {
             Poll = _polls.GetPollById(id);
-            Questions = _questions.GetByPollId(id);
+            Questions = _questions.GetByPollId(id).Where(q => q.Saved == true);
             Poll.CountQuestions = Questions.Count();
             IsAdmin = HttpContext.Session.Get<Models.User>("user").IsAdmin;
             UserId = HttpContext.Session.Get<Models.User>("user").Id;
+
             if(_answer.GetByUserIdAndPollId(UserId, id) == null)
             {
                 UserAnswer = -1;

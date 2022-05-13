@@ -43,6 +43,8 @@ namespace MyWebForum.Pages.Topic
                 await _db.Topic.AddAsync(Topic);
                 await _db.SaveChangesAsync();
 
+                TempData["Success"] = "Topic created successfuly!";
+
                 return RedirectToPage("../Index");
             }
             return Page();

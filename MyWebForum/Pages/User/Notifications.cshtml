@@ -1,0 +1,60 @@
+﻿@page
+@model MyWebForum.Pages.User.NotificationsModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h4> Notifications </h4>
+
+ <table class="table">
+            <thead>
+                <tr>
+                    <td><b>Title</b></td>
+                    <td><b>Description</b></td>
+                    <td><b>Date time</b></td>
+                    <td><b>Status</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach(var notif in Model.Notifications)
+                    {
+                        <tr>
+                        <td>@notif.Title</td>
+                        <td>@notif.Description</td>
+                        <td>@notif.Date</td>
+                        <td>
+                            @{
+                                if(notif.Checked == true)
+                                {
+                                    <div style="color: green">Checked</div>
+                                }else{
+                                    <form method="post" asp-page-handler="check" asp-route-id="@notif.Id">
+                                        <input class="btn btn-success" type="submit" value="Check"/>
+
+                                        <input type="hidden" asp-for="@Model.CurrentUserId">
+                                        <input type="hidden" asp-for="@Model.IsAdmin">
+                                    </form>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <form method="post" asp-page-handler="delete" asp-route-id="@notif.Id">
+                                <input class="btn btn-danger" type="submit" value="Delete"/>
+
+                                <input type="hidden" asp-for="@Model.CurrentUserId">
+                                <input type="hidden" asp-for="@Model.IsAdmin">
+                            </form>
+                        </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>

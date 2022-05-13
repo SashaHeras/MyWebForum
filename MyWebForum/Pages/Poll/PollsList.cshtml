@@ -36,14 +36,21 @@
     </table>
     <br>
 
+    if(Model.Polls == null)
+    {
+        <h2 style="text-align: center; font-family: cursive;"> No one poll in the forum!</h2>
+    }
+    else
+    {
         @foreach (var poll in Model.Polls)
         {
             <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px">
-                <a asp-page="/Poll/Index" asp-route-id="@poll.Id">
+                <a asp-page="/Poll/Index" asp-route-id="@poll.Id" style="color: #F4A460; font-family: cursive;">
                     @poll.Name
                 </a>
-                <div class="pull-right">@poll.CountViews</div>
+                <div class="pull-right" style="color: #F4A460; font-family: cursive;">@poll.CountViews</div>
             </div>
             <br/>
         } 
+    }
 }

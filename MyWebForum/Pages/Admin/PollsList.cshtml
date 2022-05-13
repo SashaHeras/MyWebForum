@@ -1,5 +1,5 @@
 ﻿@page
-@model MyWebForum.Pages.Admin.CommentsListModel
+@model MyWebForum.Pages.Admin.PollsListModel
 @{
     if(Model.IsAdmin == true)
     {
@@ -11,42 +11,48 @@
     }
 }
 
-<h4> All comments </h4>
+<h4> All polls </h4>
 
-        <table class="table">
+ <table class="table">
             <thead>
                 <tr>
                     <td><b>#</b></td>
-                    <td><b>Author</b></td>
-                    <td><b>Text</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Description</b></td>
+                    <td><b>Count views</b></td>
                     <td><b>Action</b></td>
                 </tr>
             </thead>
             <tbody>
                 @{
-                    foreach(var comment in Model.Comments)
+                    foreach(var poll in Model.Polls)
                     {
                         <tr>
-                            <td>@comment.CommentId</td>
-                            <td><a asp-page="/User/UserPosts" asp-route-id="@comment.UserId">@comment.UserName</a></td>
-                            <td>@comment.CommentText</td>
+                            <td>@poll.Id</td>
+                            <td><a asp-page="/Poll/Index" asp-route-id="@poll.Id">@poll.Name</a></td>
+                            <td>@poll.Description</td>
+                            <td>@poll.CountViews</td>
                             <td width="6%">
                                   @{
-                                      if(comment.IsAllow == true){
-                                          <form method="post" asp-page-handler="disallow" asp-route-id="@comment.CommentId">
+                                      if(poll.IsAllowed == true){
+                                          <form method="post" asp-page-handler="disallow" asp-route-id="@poll.Id">
                                             <input class="btn btn-warning" type="submit" value="Disallow"/>
+
+                                            <input type="hidden" asp-for="@Model.IsAdmin">
                                           </form>
                                       }
                                       else{
-                                          <form method="post" asp-page-handler="allow" asp-route-id="@comment.CommentId">
+                                          <form method="post" asp-page-handler="allow" asp-route-id="@poll.Id">
                                             <input class="btn btn-success" type="submit" value="Allow"/>
+                                            <input type="hidden" asp-for="@Model.IsAdmin">
                                           </form>
                                       }
                                   }
                             </td>
                             <td>
-                                <form method="post" asp-page-handler="delete" asp-route-id="@comment.CommentId">
+                                <form method="post" asp-page-handler="delete" asp-route-id="@poll.Id">
                                     <input class="btn btn-danger" type="submit" value="Delete"/>
+                                    <input type="hidden" asp-for="@Model.IsAdmin">
                                   </form>
                             </td>
                         </tr>

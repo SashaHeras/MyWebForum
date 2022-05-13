@@ -23,6 +23,8 @@ namespace MyWebForum.Data
 
         public DbSet<UserPollAnswer>? UsersPollsAnswers { get; set; }
 
+        public DbSet<Notification>? Notification { get; set; }
+
         public MyForumContext(DbContextOptions<MyForumContext> options) : base(options)
         {
 

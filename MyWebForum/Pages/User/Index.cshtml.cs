@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyForum.Extensions;
 using MyWebForum.Data;
+using MyWebForum.Data.Repository.Repositories;
 using MyWebForum.Models;
 
 namespace MyWebForum.Pages.User
@@ -10,16 +11,20 @@ namespace MyWebForum.Pages.User
     public class IndexModel : PageModel
     {
         private readonly MyForumContext _db;
+        private NotificationRepository _notif;
 
         public MyWebForum.Models.User User { get; set; }
 
-        public IEnumerable<MyWebForum.Models.Post> Posts { get; set; }
+        public IEnumerable<Models.Post> Posts { get; set; }
 
         public IFormFile Picture { get; set; }
+
+        public int NewNotifications { get; set; }
 
         public IndexModel(MyForumContext db)
         {
             _db = db;
+            _notif = new NotificationRepository(db);
         }
 
         public IActionResult OnGet()
@@ -31,6 +36,7 @@ namespace MyWebForum.Pages.User
 
             User = HttpContext.Session.Get<MyWebForum.Models.User>("user");
             Posts = _db.Post.Where(p => p.UserId == User.Id);
+            NewNotifications = _notif.GetUsersUnreadedNotificationCount(User.Id);
 
             if (User.Picture == null)
             {
@@ -82,6 +88,8 @@ namespace MyWebForum.Pages.User
 
                 HttpContext.Session.Remove("user");
                 HttpContext.Session.Set<Models.User>("user", User);
+
+                TempData["Success"] = "You picture added successfuly!";
 
                 return RedirectToPage("Index");
             }

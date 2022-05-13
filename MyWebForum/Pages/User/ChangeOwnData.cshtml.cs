@@ -66,6 +66,8 @@ namespace MyWebForum.Pages.User
 
                 HttpContext.Session.Set<Models.User>("user", User);
 
+                TempData["Success"] = "You data updated successfuly!";
+
                 return RedirectToPage("Index");
             }
 

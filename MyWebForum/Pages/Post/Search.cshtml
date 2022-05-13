@@ -40,10 +40,10 @@
         foreach (var post in Model.SearchedPosts)
         {
             <div style="background-color: white; width: 400px; padding: 10px; border-radius: 6px">
-                <a asp-page="/Post/Index" asp-route-id="@post.PostId">
+                <a asp-page="/Post/Index" asp-route-id="@post.PostId" style="color: #F4A460; font-family: cursive;">
                     @post.PostName
                 </a>
-                <a class="pull-right" asp-page="/Topic/Index" asp-route-id="@post.TopicId">
+                <a class="pull-right" asp-page="/Topic/Index" asp-route-id="@post.TopicId" style="color: #F4A460; font-family: cursive;">
                     @post.TopicName
                 </a>
             </div>

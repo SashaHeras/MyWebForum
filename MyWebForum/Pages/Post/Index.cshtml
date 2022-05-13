@@ -102,3 +102,10 @@
         }
     </div>
 </div>
+
+@if(TempData["Success"] != null)
+{
+    <script type="text/javascript">
+        alert("@TempData["Success"]");
+    </script>
+}

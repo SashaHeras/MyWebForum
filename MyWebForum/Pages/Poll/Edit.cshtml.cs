@@ -64,7 +64,8 @@ namespace MyWebForum.Pages.Poll
             Models.PollQuestion q = new Models.PollQuestion()
             {
                 Name = "",
-                PollId = id
+                PollId = id, 
+                Saved = false
             };
 
             _db.PollQuestions.Add(q);
@@ -85,6 +86,7 @@ namespace MyWebForum.Pages.Poll
             {
                 string str = Request.Form[i.Id.ToString()];
                 i.Name = str;
+                i.Saved = true;
 
                 _db.PollQuestions.Update(i);
             }
