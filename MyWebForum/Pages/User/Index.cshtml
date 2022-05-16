@@ -40,29 +40,22 @@
 </div>
 
 <br />
-<a class="btn btn-primary" style="margin: 10px" asp-page="/User/ChangeOwnData">Change data</a>
-<a class="btn btn-primary" style="margin: 10px" asp-page="/User/ChangePass">Change password</a>
-@{
-    if (Model.User.IsVerified == false)
-    {
-        <a class="btn btn-default" style="margin: 10px" asp-page="/User/Verification" asp-route-id="@Model.User.Id">Verification</a>
-    }else{
-        <div class="btn btn-success" style="margin: 10px">You varificated</div>
-    }
-}
 
-<a asp-page="/User/Notifications" asp-route-id="@Model.User.Id" class="btn btn-default">
-  <span>Notifications</span>
-    @{
-        if(Model.NewNotifications != null)
-        {
-            <span class="badge">
-                @Model.NewNotifications
-            </span>
-        }
-    }
-  
-</a>
+
+<p>
+    Notifications: 
+    <a asp-page="/User/Notifications" asp-route-id="@Model.User.Id" style="text-decoration: none;">
+        <img src="~/images/bell.png" alt="bell" width="25px">
+        @{
+                if(Model.NewNotifications != null)
+                {
+                    <span class="badge">
+                        @Model.NewNotifications
+                    </span>
+                }
+         }
+    </a>
+</p>
 
 <br />
 
@@ -102,6 +95,17 @@
             </tbody>
         </table>
 
+</br>
+<a class="btn btn-primary" style="margin: 10px" asp-page="/User/ChangeOwnData">Change data</a>
+<a class="btn btn-primary" style="margin: 10px" asp-page="/User/ChangePass">Change password</a>
+@{
+    if (Model.User.IsVerified == false)
+    {
+        <a class="btn btn-default" style="margin: 10px" asp-page="/User/Verification" asp-route-id="@Model.User.Id">Verification</a>
+    }else{
+        <div class="btn btn-success" style="margin: 10px">You varificated</div>
+    }
+}
 
 
 <a class="btn btn-danger logout" style="margin-top: 180px;" asp-page="/User/Login">Log out</a>

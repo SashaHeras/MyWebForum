@@ -225,6 +225,34 @@ input[type="submit"].wysija-submit {
     font-size: 26px;
 }
 
+.topMenu {
+    color: #D2691E;
+    font-family: cursive;
+    font-size: 16px;
+}
+
+a.topMenu {
+    color: #D2691E;
+    font-family: cursive;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+    a.topMenu:hover {
+        color: #D2691E;
+        font-family: cursive;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+.topicBox {
+    background-color: white; 
+    width: 400px; 
+    padding: 10px; 
+    border-radius: 6px;
+}
+
+
 a#styleTitle {
     color: #D2691E;
     font-family: cursive;
@@ -237,18 +265,7 @@ body {
 }
 
 .notification {
-    background-color: #555;
-    color: white;
-    text-decoration: none;
-    padding: 15px 26px;
-    position: relative;
-    display: inline-block;
-    border-radius: 2px;
 }
-
-    .notification:hover {
-        background: red;
-    }
 
     .notification .badge {
         position: absolute;
@@ -259,6 +276,26 @@ body {
         background: red;
         color: white;
     }
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+}
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+}
 
 btn btn-default..badge {
     position: absolute;

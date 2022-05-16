@@ -43,7 +43,7 @@ namespace MyWebForum.Pages.Admin
             _db.Polls.Update(poll);
             _db.SaveChanges();
 
-            return RedirectToPage("PollsList");
+            return RedirectToPage("/Admin/CreateNotification", new { ui = poll.UserId, t = "Your poll was disallowed by administrator", route = "/Admin/PollsList" });
         }
 
         public IActionResult OnPostAllow(int id)
@@ -54,7 +54,7 @@ namespace MyWebForum.Pages.Admin
             _db.Polls.Update(poll);
             _db.SaveChanges();
 
-            return RedirectToPage("PollsList");
+            return RedirectToPage("/Admin/CreateNotification", new { ui = poll.UserId, t = "Your poll was allowed by administrator", route = "/Admin/PollsList" });
         }
 
         public IActionResult OnPostDelete(int id)
@@ -78,7 +78,7 @@ namespace MyWebForum.Pages.Admin
             _db.Polls.Remove(poll);
             _db.SaveChanges();
 
-            return RedirectToPage("PollsList");
+            return RedirectToPage("/Admin/CreateNotification", new { ui = poll.UserId, t = "Your poll was deleted by administrator", route = "/Admin/PollsList" });
         }
     }
 }

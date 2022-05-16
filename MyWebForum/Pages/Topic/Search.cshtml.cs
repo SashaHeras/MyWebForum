@@ -29,6 +29,8 @@ namespace MyWebForum.Pages.Topic
         public void OnGet()
         {
             IsAdmin = HttpContext.Session.Get<MyWebForum.Models.User>("user").IsAdmin;
+
+            Topics = _topics.GetAll();
         }
 
         public async Task<IActionResult> OnPost()

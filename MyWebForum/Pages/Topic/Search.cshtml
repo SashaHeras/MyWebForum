@@ -48,7 +48,7 @@
     {
         foreach (var topic in Model.Topics)
         {
-            <a id="containerTopic" asp-page="/Post/Index" asp-route-id="@topic.TopicId">
+            <a class="topicBox" asp-page="/Post/Index" asp-route-id="@topic.TopicId">
                 @topic.TopicName
             </a>
             <br><br>

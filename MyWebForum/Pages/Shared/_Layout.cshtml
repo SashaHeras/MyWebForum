@@ -24,8 +24,11 @@
         <div id="header" style="text-align: center">
             <table width="100%">
                 <tr>
-                    <td width="91%" style="padding-top: 10px"><a id="styleTitle" asp-page="/Index">MyForum</a></td>
-                    <td width="9%" style="padding-top: 10px"><a type="button" asp-page="/User/Index" class="btn btn-link profileLink">My Profile</a></td>
+                    <td style="padding-top: 10px; width: 175px"><div id="styleTitle">MyForum</div></td>
+                    <td style="padding-top: 12px; width: 50px"><a class="topMenu" asp-page="/Index">Home</a></td>
+                    <td style="padding-top: 12px; width: 50px"><a class="topMenu" asp-page="/Poll/PollsList">Polls</a></td>
+                    <td style="padding-top: 12px; width: 75px"><a class="topMenu" asp-page="/Topic/Search">Find topic</a></td>
+                    <td class="pull-right" style="padding-top: 10px"><a type="button" asp-page="/User/Index" class="btn btn-link topMenu">My Profile</a></td>
                 </tr>
             </table>
         </div>

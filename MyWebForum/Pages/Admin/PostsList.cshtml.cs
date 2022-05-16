@@ -37,7 +37,7 @@ namespace MyWebForum.Pages.Admin
             _db.Post.Update(post);
             _db.SaveChanges();
 
-            return RedirectToPage("PostsList");
+            return RedirectToPage("/Admin/CreateNotification", new { ui = post.UserId, t = "Your post was disallowed by administrator", route = "/Admin/PostsList" });
         }
 
         public IActionResult OnPostAllow(int id)
@@ -48,7 +48,7 @@ namespace MyWebForum.Pages.Admin
             _db.Post.Update(post);
             _db.SaveChanges();
 
-            return RedirectToPage("PostsList");
+            return RedirectToPage("/Admin/CreateNotification", new { ui = post.UserId, t = "Your post was allowed by administrator", route = "/Admin/PostsList" });
         }
 
         public IActionResult OnPostDelete(int id)
@@ -58,7 +58,7 @@ namespace MyWebForum.Pages.Admin
             _db.Post.Remove(post);
             _db.SaveChanges();
 
-            return RedirectToPage("PostsList");
+            return RedirectToPage("/Admin/CreateNotification", new { ui = post.UserId, t = "Your post was deleted by administrator", route = "/Admin/PostsList" });
         }
     }
 }

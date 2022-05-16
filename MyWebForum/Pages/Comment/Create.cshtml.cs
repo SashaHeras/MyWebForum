@@ -53,6 +53,17 @@ namespace MyWebForum.Pages.Comment
                 Comment.PostId = Post.PostId;
                 Comment.UserName = HttpContext.Session.Get<MyWebForum.Models.User>("user").Name;
 
+                Models.Notification n = new Models.Notification()
+                {
+                    Title = $"User {_users.GetUserNameById(UserId)}, leave the comment to your post {Post.PostName}",
+                    Description = Comment.CommentText,
+                    Checked = false,
+                    Date = DateTime.Now,
+                    UserId = Post.UserId
+                };
+
+                _db.Notification.Add(n);
+
                 _db.Comment.Add(Comment);
                 _db.SaveChanges();
 

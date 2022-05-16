@@ -1,0 +1,28 @@
+﻿@page
+@model MyWebForum.Pages.Admin.CreateNotificationModel
+@{
+    if(Model.IsAdmin == true)
+    {
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/Shared/_Layout.cshtml";
+    }
+}
+<form method="post" asp-page-handler="add">
+        <div class="form-group">
+            <label asp-for="Notification.Description" class="control-label">Description: </label>
+            <input style="width: 450px;" type="text" asp-for="@Model.Notification.Description" class="form-control" />
+            <span asp-validation-for="Notification.Description" class="text-danger"></span>
+        </div>
+        <input asp-for="@Model.IsAdmin" type="hidden"/>
+        <input asp-for="@Model.Route" type="hidden"/>
+        <input asp-for="@Model.Notification.Date" type="hidden"/>
+        <input asp-for="@Model.Notification.Checked" type="hidden"/>
+        <input asp-for="@Model.Notification.Title" type="hidden"/>
+        <input asp-for="@Model.Notification.UserId" type="hidden"/>
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-default" />
+        </div>
+</form>
