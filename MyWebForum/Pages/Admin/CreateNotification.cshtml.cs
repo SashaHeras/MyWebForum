@@ -35,23 +35,6 @@ namespace MyWebForum.Pages.Admin
             Route = route;
         }
 
-        public IActionResult OnGet(int ui, string t, string d, int pi)
-        {
-            Notification = new()
-            {
-                UserId = ui,
-                Title = t,
-                Description = d,    
-                Checked = false,
-                Date = DateTime.Now
-            };
-
-            _db.Notification.Add(Notification);
-            _db.SaveChanges();
-
-            return RedirectToPage("/Post/Index", new { id = pi });
-        }
-
         public IActionResult OnPostAdd()
         {
             if (Notification.Description != null)

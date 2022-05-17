@@ -287,7 +287,7 @@ body {
     color: white;
 }
 
-.badge {
+a.badge {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -297,7 +297,7 @@ body {
     color: white;
 }
 
-btn btn-default..badge {
+btn btn-default.badge {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -306,3 +306,4 @@ btn btn-default..badge {
     background: red;
     color: white;
 }
+

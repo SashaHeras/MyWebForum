@@ -28,11 +28,20 @@ namespace MyWebForum.Pages.Admin
             _answers = new AnswerRepository(db);
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if(HttpContext.Session.Get<Models.User>("user").IsAdmin != true)
+            {
+                HttpContext.Session.Remove("user");
+
+                return RedirectToPage("/User/Login");
+            }
+
             IsAdmin = HttpContext.Session.Get<Models.User>("user").IsAdmin;
 
             Polls = _polls.GetAll();
+
+            return Page();
         }
 
         public IActionResult OnPostDisallow(int id)

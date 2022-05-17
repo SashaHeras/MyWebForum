@@ -10,19 +10,33 @@
     <link href="~/css/site.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .adminList {
+            color: #F4A460;
+            font-family: cursive;
+            margin-left: 5px;
+            text-decoration: none;
+        }
 
+        .adminList:hover {
+            color: #F4A460;
+            font-family: cursive;
+            margin-left: 5px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <div id="content">
         <div id="leftSidebar">
             <h3 id="cursive-center" style="color: #F4A460; margin-left: 5px; font-family: cursive;">Admin panel</h3>
             <ul>                
-                <li><a asp-page="/Admin/UsersList" id="cursive-center" style="color: #F4A460; font-family: cursive; margin-left: 5px;">Users</a></li>
-                <li><a asp-page="/Admin/TopicsList" id="cursive-center" style="color: #F4A460; font-family: cursive; margin-left: 5px;">Topics</a></li>                
-                <li><a asp-page="/Admin/PostsList" id="cursive-center" style="color: #F4A460; font-family: cursive; margin-left: 5px;">Posts</a></li>
-                <li><a asp-page="/Admin/PollsList" id="cursive-center" style="color: #F4A460; font-family: cursive; margin-left: 5px;">Polls</a></li>
-                <li><a asp-page="/Admin/CommentsList" id="cursive-center" style="color: #F4A460; font-family: cursive; margin-left: 5px;">Comments</a></li>
-                <li><a asp-page="/Admin/CompaintsList" id="cursive-center" style="color: #F4A460; font-family: cursive; margin-left: 5px;">Complaints</a></li>
+                <li><a asp-page="/Admin/UsersList" class="adminList"id="cursive-center" >Users</a></li>
+                <li><a asp-page="/Admin/TopicsList" class="adminList" id="cursive-center" >Topics</a></li>                
+                <li><a asp-page="/Admin/PostsList" class="adminList" id="cursive-center" >Posts</a></li>
+                <li><a asp-page="/Admin/PollsList" class="adminList" id="cursive-center" >Polls</a></li>
+                <li><a asp-page="/Admin/CommentsList" class="adminList" id="cursive-center" >Comments</a></li>
+                <li><a asp-page="/Admin/CompaintsList" class="adminList" id="cursive-center" >Complaints</a></li>
             </ul>
         </div>
 

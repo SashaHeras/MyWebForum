@@ -63,6 +63,7 @@ namespace MyWebForum.Pages.Comment
                 };
 
                 _db.Notification.Add(n);
+                _db.SaveChanges();
 
                 _db.Comment.Add(Comment);
                 _db.SaveChanges();

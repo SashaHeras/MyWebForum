@@ -59,9 +59,12 @@ namespace MyWebForum.Pages.User
 
         public bool CheckPass(string email, string pass)
         {
-            if (_users.GetAll().Where(u => u.Email.CompareTo(email) == 0).FirstOrDefault().Password.CompareTo(pass) == 0)
+            if (_users.GetAll().Where(u => u.Email.CompareTo(email) == 0).FirstOrDefault() != null)
             {
-                return true;
+                if(_users.GetAll().Where(u => u.Email.CompareTo(email) == 0).FirstOrDefault().Password.CompareTo(pass) == 0)
+                {
+                    return true;
+                }                
             }
 
             return false;
