@@ -49,6 +49,14 @@ namespace MyWebForum.Pages.Admin
             Models.Poll poll = _polls.GetPollById(id);
             poll.IsAllowed = false;
 
+            var questions = _questions.GetByPollId(poll.Id);
+
+            foreach (var q in questions)
+            {
+                q.Saved = true;
+                _db.PollQuestions.Update(q);
+            }
+
             _db.Polls.Update(poll);
             _db.SaveChanges();
 

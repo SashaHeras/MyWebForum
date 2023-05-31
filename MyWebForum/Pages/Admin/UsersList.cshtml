@@ -35,7 +35,7 @@
                             <td width="6%">
                                   @{
                                       if(user.IsAdmin == true){
-                                          <form method="post" asp-page-handler="pikuprights" asp-route-id="@user.Id">
+                                          <form method="post" asp-page-handler="pickuprights" asp-route-id="@user.Id">
                                             <input class="btn btn-warning" type="submit" value="Pick up rights"/>
                                           </form>
                                       }
